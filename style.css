@@ -1,201 +1,271 @@
-/* === GENERAL === */
+/* =========================
+   RESET & ELEGANCE
+========================= */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Russo One', sans-serif;
+  box-sizing: border-box;
 }
 
+/* =========================
+   VARIABLES – CAPPED LEGENDS STYLE
+========================= */
+:root {
+  /* Paleta Capped Legends */
+  --capped-brown: #5d2a1d; /* Cuero oscuro */
+  --capped-cream: #e1e1e1; /* Cuero claro/gris */
+  --capped-gold: #d4af37;  /* Dorado base */
+  --capped-gold-bright: #f9e38c; /* Brillo dorado */
+  --capped-stitch: #b89550; /* Color de costuras */
+  
+  /* Textos */
+  --text-primary: #333333;
+  --text-gold: #c29b40;
+}
+
+/* =========================
+   BODY – LEATHER TEXTURE BACKGROUND
+========================= */
 body {
+  font-family: 'Russo One', sans-serif;
   min-height: 100vh;
-  background: url('fondo.jpg') no-repeat center center/cover;
+  overflow-x: hidden;
+  color: var(--text-primary);
+  /* Fondo dividido como la imagen: Cuero marrón y Cuero crema */
+  background: 
+    linear-gradient(105deg, 
+      var(--capped-brown) 0%, 
+      var(--capped-brown) 15%, 
+      var(--capped-gold) 15.5%, 
+      var(--capped-gold) 16.5%, 
+      var(--capped-cream) 17%
+    );
+  background-attachment: fixed;
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-  position: relative;
 }
 
-/* Oscurecer fondo un poco */
-.background-overlay {
+/* Efecto de textura de cuero sutil */
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: -1;
+  background-image: url('https://www.transparenttextures.com/patterns/leather.png');
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* === CONTENEDOR GENERAL === */
+/* =========================
+   CONTAINER
+========================= */
 .container {
+  max-width: 440px;
   width: 100%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
-/* === SECCIONES === */
+/* =========================
+   SECTIONS & ANIMATIONS
+========================= */
 .section {
   display: none;
-  width: 100%;
-  justify-content: center;
+  min-height: 90vh;
   align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.6s ease-out both;
 }
 
 .section.active {
   display: flex;
 }
 
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* =========================
+   CONTENT BOX – PREMIUM LEATHER CARD
+========================= */
 .content-box {
-  background: rgba(0, 40, 0, 0.8);
-  border: 3px solid #00ff66;
-  box-shadow: 0 0 20px #00ff66aa;
-  border-radius: 20px;
-  padding: 40px;
-  width: 90%;
-  max-width: 500px;
+  background: #f0f0f0;
+  border-radius: 15px;
+  padding: 35px 25px;
   text-align: center;
-  color: white;
-  backdrop-filter: blur(6px);
+  /* Borde con efecto de costura */
+  border: 4px double var(--capped-gold);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.4),
+    inset 0 0 10px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
 }
 
-.content-box img{
-      width: 100%;
-      margin-bottom: 7%;
+/* Título superior estilo Capped */
+.content-box::after {
+  content: "CAPPED LEGENDS";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, #4a2118, #2e140e);
+  color: var(--capped-gold-bright);
+  padding: 3px 25px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border-radius: 0 0 12px 12px;
+  border: 1px solid var(--capped-gold);
+  border-top: none;
 }
 
-/* La sección 2 tendrá un tamaño más grande */
-.content-box.big {
-  max-width: 800px;
-  background: rgba(0, 30, 60, 0.8);
-  border-color: #00bfff;
-  box-shadow: 0 0 25px #00bfff99;
+/* =========================
+   LOGO & TITLES
+========================= */
+.logo {
+  width: 100%;
+  height: auto;
+  margin: 0 auto 20px auto;
 }
 
-/* === TITULOS === */
 h2 {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px #00ff99;
+  font-size: 28px;
+  text-transform: uppercase;
+  /* Efecto de texto dorado metálico */
+  background: linear-gradient(to bottom, #f9e38c 0%, #d4af37 50%, #8a6e2f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.3));
+  margin-bottom: 5px;
 }
 
-.highlight {
-  color: #00ffcc;
+p {
+  font-size: 13px;
+  color: #613b2e;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
-/* === INPUT Y BOTÓN === */
+/* =========================
+   INPUTS – CLASSIC STYLE
+========================= */
 input {
-  width: 80%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid #00ffcc;
-  margin: 15px 0;
-  font-size: 1rem;
-  text-align: center;
-  background: rgba(255,255,255,0.1);
-  color: white;
+  width: 100%;
+  padding: 16px;
+  margin-top: 15px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  background: #ffffff;
+  color: var(--capped-brown);
+  font-family: inherit;
+  transition: 0.3s;
 }
 
+input:focus {
+  outline: none;
+  border-color: var(--capped-gold);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+/* =========================
+   BUTTON – GOLDEN LEATHER
+========================= */
 button {
-  background: linear-gradient(90deg, #007f0e, #00ff66);
-  color: white;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 25px;
+  margin-top: 25px;
+  width: 100%;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #91712a;
+  font-weight: bold;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: 0.3s;
+  /* Gradiente dorado premium */
+  background: linear-gradient(180deg, #d4af37 0%, #b89550 100%);
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #00ff99;
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
-/* === CARTAS === */
+/* =========================
+   CARDS – MINI CAPPED DESIGN
+========================= */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
-  justify-items: center;
-  margin-bottom: 25px;
+  margin-top: 25px;
 }
 
 .card {
-  border: 3px solid #00ff99;
+  background: #fff;
   border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: 0.3s;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 3px;
+  position: relative;
+  border: 1px solid var(--capped-gold);
+  transition: 0.3s ease;
+}
+
+/* Costura lateral simulada */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed var(--capped-gold);
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .card img {
   width: 100%;
-  height: auto;
+  border-radius: 6px;
+  display: block;
 }
 
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px #00ff99aa;
+  z-index: 10;
 }
 
 .card.selected {
-  border-color: gold;
-  box-shadow: 0 0 20px gold;
+  border: 3px solid var(--capped-brown);
+  box-shadow: 0 0 15px var(--capped-gold);
 }
 
-/* === SPINNER === */
+/* =========================
+   SPINNER – GOLDEN RING
+========================= */
 .spinner {
-  margin: 20px auto;
-  border: 6px solid rgba(255, 255, 255, 0.2);
-  border-top: 6px solid #00ffcc;
+  width: 60px;
+  height: 60px;
+  margin: 30px auto;
+  border: 4px solid #f3f3f3;
+  border-top-color: var(--capped-gold);
+  border-bottom-color: var(--capped-brown);
   border-radius: 50%;
-  width: 64px;
-  height: 64px;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .content-box {
-    padding: 25px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  input {
-    width: 100%;
-  }
-
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 380px) {
   .cards-grid {
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    margin-top: 15%;
-  }
-}
-
-@media (max-width: 480px) {
-  .content-box {
-    padding: 20px;
-    border-width: 2px;
-  }
-
-  button {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-
-  h2 {
-    font-size: 1.3rem;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
